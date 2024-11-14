@@ -86,6 +86,18 @@ export default function UserDashboard() {
       </div>
       <Card className="mt-8">
         <CardHeader>
+          <CardTitle>Acceso para Expertos en Salud</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Link href="/expert-dashboard">
+            <Button className="w-full bg-blue-600 hover:bg-blue-700">
+              Vista de Experto en Salud
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
+      <Card className="mt-8">
+        <CardHeader>
           <CardTitle>Notificaciones Importantes</CardTitle>
         </CardHeader>
         <CardContent>
