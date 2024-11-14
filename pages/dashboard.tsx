@@ -114,7 +114,7 @@ export default function UserDashboard() {
         </CardHeader>
         <CardContent>
           <ul className="list-disc list-inside">
-            <li>Acá puedes ver los segiros médicos disponibles</li>
+            <li>Acá puedes ver los seguros médicos disponibles</li>
             <Link href="/insurance" className="w-full">
               <Button className="w-full">Ver seguros médicos</Button>
             </Link>
