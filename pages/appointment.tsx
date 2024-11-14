@@ -27,19 +27,19 @@ const experts: Expert[] = [
     id: 1,
     name: "Dra. Ana García",
     specialty: "Psicóloga Clínica",
-    image: "/images/specialist.jpg",
+    image: "https://cmlasalav.github.io/mentalhealth.github.io/images/specialist.jpg",
   },
   {
     id: 2,
     name: "Dr. Carlos Rodríguez",
     specialty: "Psiquiatra",
-    image: "/images/specialist.jpg",
+    image: "https://cmlasalav.github.io/mentalhealth.github.io/images/specialist.jpg",
   },
   {
     id: 3,
     name: "Lic. María López",
     specialty: "Terapeuta Familiar",
-    image: "/images/specialist.jpg",
+    image: "https://cmlasalav.github.io/mentalhealth.github.io/images/specialist.jpg",
   },
 ];
 
