@@ -89,7 +89,7 @@ export default function UserDashboard() {
           <CardTitle>Acceso para Expertos en Salud</CardTitle>
         </CardHeader>
         <CardContent>
-          <Link href="/expert-dashboard">
+          <Link href="/expertDashboard">
             <Button className="w-full bg-blue-600 hover:bg-blue-700">
               Vista de Experto en Salud
             </Button>
