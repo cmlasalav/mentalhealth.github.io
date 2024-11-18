@@ -86,18 +86,6 @@ export default function UserDashboard() {
       </div>
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle>Acceso para Expertos en Salud</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Link href="/expertDashboard">
-            <Button className="w-full bg-blue-600 hover:bg-blue-700">
-              Vista de Experto en Salud
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
-      <Card className="mt-8">
-        <CardHeader>
           <CardTitle>Notificaciones Importantes</CardTitle>
         </CardHeader>
         <CardContent>
@@ -131,6 +119,18 @@ export default function UserDashboard() {
               <Button className="w-full">Ver seguros médicos</Button>
             </Link>
           </ul>
+        </CardContent>
+      </Card>
+      <Card className="mt-8">
+        <CardHeader>
+          <CardTitle>Acceso para Expertos en Salud</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Link href="/expertDashboard">
+            <Button className="w-full bg-blue-600 hover:bg-blue-700">
+              Vista de Experto en Salud
+            </Button>
+          </Link>
         </CardContent>
       </Card>
     </div>
