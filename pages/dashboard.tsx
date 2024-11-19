@@ -129,18 +129,20 @@ export default function UserDashboard() {
           </CardFooter>
         </AnimatedCard>
       </div>
-      <AnimatedCard title="Acceso para Expertos en Salud" className="mt-8">
-        <CardContent>
-          <Link href="/expert-dashboard">
-            <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
-              Vista de Experto en Salud
-            </Button>
-          </Link>
-        </CardContent>
-      </AnimatedCard>
-      <AnimatedCard title="Acá puedes ver los seguros médicos disponibles" className="mt-8">
+      <AnimatedCard  title="Planes de Pago">
         <CardContent>
           <ul className="list-disc list-inside">
+            <li>Acá puedes ver los planes disponibles</li>
+            <Link href="/plan" className="w-full">
+              <Button className="w-full">Ver planes</Button>
+            </Link>
+          </ul>
+        </CardContent>
+      </AnimatedCard>
+      <AnimatedCard  title="Seguros disponibles">
+        <CardContent>
+          <ul className="list-disc list-inside">
+            <li>Acá puedes ver los seguros médicos disponibles</li>
             <Link href="/insurance" className="w-full">
               <Button className="w-full">Ver seguros médicos</Button>
             </Link>
@@ -169,6 +171,15 @@ export default function UserDashboard() {
               del estrés".
             </motion.li>
           </ul>
+        </CardContent>
+      </AnimatedCard>
+      <AnimatedCard title="Acceso para Expertos en Salud" className="mt-8">
+        <CardContent>
+          <Link href="/expert-dashboard">
+            <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+              Vista de Experto en Salud
+            </Button>
+          </Link>
         </CardContent>
       </AnimatedCard>
     </motion.div>
