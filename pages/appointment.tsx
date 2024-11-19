@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -70,78 +71,106 @@ export default function AppointmentRequest() {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.5 }}
+      className="container mx-auto py-8 px-4 bg-gray-50 min-h-screen"
+    >
+      <motion.h1 
+        className="text-3xl font-semibold text-center mb-8 text-gray-800"
+        initial={{ y: -20 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 50 }}
+      >
         Solicitar Cita con Expertos
-      </h1>
-      <Input
-        type="text"
-        placeholder="Buscar expertos por nombre o especialidad"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-8"
-      />
-      <div className="grid md:grid-cols-3 gap-8">
-        {filteredExperts.map((expert) => (
-          <Card
+      </motion.h1>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <Input
+          type="text"
+          placeholder="Buscar expertos por nombre o especialidad"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="mb-8 bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+        />
+      </motion.div>
+      <div className="grid md:grid-cols-3 gap-6">
+        {filteredExperts.map((expert, index) => (
+          <motion.div
             key={expert.id}
-            className="cursor-pointer"
-            onClick={() => setSelectedExpert(expert)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
           >
-            <CardHeader>
-              <img
-                src={expert.image}
-                alt={expert.name}
-                className="w-24 h-24 rounded-full mx-auto mb-4"
-              />
-              <CardTitle>{expert.name}</CardTitle>
-              <CardDescription>{expert.specialty}</CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Button className="w-full">Solicitar Cita</Button>
-            </CardFooter>
-          </Card>
+            <Card
+              className="cursor-pointer transition-shadow hover:shadow-lg"
+              onClick={() => setSelectedExpert(expert)}
+            >
+              <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+                <img
+                  src={expert.image}
+                  alt={expert.name}
+                  className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-md"
+                />
+                <CardTitle className="text-gray-800">{expert.name}</CardTitle>
+                <CardDescription className="text-gray-600">{expert.specialty}</CardDescription>
+              </CardHeader>
+              <CardFooter>
+                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Solicitar Cita</Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
         ))}
       </div>
       {selectedExpert && (
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Solicitar Cita con {selectedExpert.name}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="date">Fecha Preferida</Label>
-                  <Input id="date" type="date" required />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Card className="mt-8 overflow-hidden shadow-md">
+            <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+              <CardTitle className="text-gray-800">Solicitar Cita con {selectedExpert.name}</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <form onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="date" className="text-gray-700">Fecha Preferida</Label>
+                    <Input id="date" type="date" required className="bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="time" className="text-gray-700">Hora Preferida</Label>
+                    <Input id="time" type="time" required className="bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="notes" className="text-gray-700">Notas (opcional)</Label>
+                    <textarea
+                      id="notes"
+                      className="w-full p-2 bg-white border border-gray-300 rounded-md focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+                      rows={4}
+                    ></textarea>
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+                    disabled={isLoading}
+                  >
+                    {isLoading && (
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    Confirmar Cita
+                  </Button>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="time">Hora Preferida</Label>
-                  <Input id="time" type="time" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="notes">Notas (opcional)</Label>
-                  <textarea
-                    id="notes"
-                    className="w-full p-2 border rounded"
-                    rows={4}
-                  ></textarea>
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                  disabled={isLoading}
-                >
-                  {isLoading && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Confirmar Cita
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
+              </form>
+            </CardContent>
+          </Card>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

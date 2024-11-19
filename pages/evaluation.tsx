@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
-import { useRouter } from "next/router";
-//import { Input } from "../components/ui/input"
+import { useRouter } from "next/navigation";
 import { Label } from "../components/ui/label";
 import {
   Card,
@@ -67,86 +67,110 @@ export default function ExpertEvaluation() {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.5 }}
+      className="container mx-auto py-8 px-4 bg-gray-50 min-h-screen"
+    >
+      <motion.h1 
+        className="text-3xl font-semibold text-center mb-8 text-gray-800"
+        initial={{ y: -20 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 50 }}
+      >
         Evaluación de Expertos en Salud
-      </h1>
-      <div className="grid md:grid-cols-3 gap-8">
-        {experts.map((expert) => (
-          <Card
+      </motion.h1>
+      <div className="grid md:grid-cols-3 gap-6">
+        {experts.map((expert, index) => (
+          <motion.div
             key={expert.id}
-            className="cursor-pointer"
-            onClick={() => setSelectedExpert(expert)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
           >
-            <CardHeader>
-              <CardTitle>{expert.name}</CardTitle>
-              <CardDescription>{expert.specialty}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Última cita: {expert.lastAppointment}</p>
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full">Evaluar</Button>
-            </CardFooter>
-          </Card>
+            <Card
+              className="cursor-pointer transition-shadow hover:shadow-lg"
+              onClick={() => setSelectedExpert(expert)}
+            >
+              <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+                <CardTitle className="text-gray-800">{expert.name}</CardTitle>
+                <CardDescription>{expert.specialty}</CardDescription>
+              </CardHeader>
+              <CardContent className="p-4">
+                <p className="text-gray-600">Última cita: {expert.lastAppointment}</p>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Evaluar</Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
         ))}
       </div>
       {selectedExpert && (
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Evaluar a {selectedExpert.name}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="rating">Calificación (1-5 estrellas)</Label>
-                  <div className="flex space-x-2">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <button
-                        key={star}
-                        type="button"
-                        onClick={() => setRating(star)}
-                        className={`text-2xl ${
-                          rating >= star ? "text-yellow-400" : "text-gray-300"
-                        }`}
-                      >
-                        ★
-                      </button>
-                    ))}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Card className="mt-8 overflow-hidden shadow-md">
+            <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+              <CardTitle className="text-gray-800">Evaluar a {selectedExpert.name}</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <form onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="rating" className="text-gray-700">Calificación (1-5 estrellas)</Label>
+                    <div className="flex space-x-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <motion.button
+                          key={star}
+                          type="button"
+                          onClick={() => setRating(star)}
+                          className={`text-2xl ${
+                            rating >= star ? "text-yellow-400" : "text-gray-300"
+                          }`}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          ★
+                        </motion.button>
+                      ))}
+                    </div>
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="comment" className="text-gray-700">Comentarios</Label>
+                    <textarea
+                      id="comment"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      rows={4}
+                    ></textarea>
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+                    disabled={isLoading}
+                  >
+                    {isLoading && (
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    Enviar Evaluación
+                  </Button>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="comment">Comentarios</Label>
-                  <textarea
-                    id="comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    className="w-full p-2 border rounded"
-                    rows={4}
-                  ></textarea>
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                  disabled={isLoading}
-                >
-                  {isLoading && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Enviar Evaluación
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-          <CardFooter>
-            <p className="text-sm text-gray-500">
-              Nota: Tus comentarios son anónimos y ayudan a mejorar nuestros
-              servicios.
-            </p>
-          </CardFooter>
-        </Card>
+              </form>
+            </CardContent>
+            <CardFooter>
+              <p className="text-sm text-gray-500">
+                Nota: Tus comentarios son anónimos y ayudan a mejorar nuestros
+                servicios.
+              </p>
+            </CardFooter>
+          </Card>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

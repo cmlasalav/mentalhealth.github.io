@@ -31,35 +31,100 @@ export default function UserDashboard() {
     { id: 2, date: "2023-06-21", expert: "Dra. Ana García" },
   ];
 
+  const paymentPlans = [
+    {
+      id: 1,
+      name: "Plan Básico",
+      price: "$49/mes",
+      features: ["1 sesión semanal", "Acceso a recursos básicos"],
+    },
+    {
+      id: 2,
+      name: "Plan Estándar",
+      price: "$99/mes",
+      features: [
+        "2 sesiones semanales",
+        "Acceso a todos los recursos",
+        "Soporte 24/7",
+      ],
+    },
+    {
+      id: 3,
+      name: "Plan Premium",
+      price: "$149/mes",
+      features: [
+        "Sesiones ilimitadas",
+        "Acceso prioritario a expertos",
+        "Evaluaciones mensuales",
+      ],
+    },
+  ];
+
+  const insurancePlans = [
+    { id: 1, name: "HealthPlus", coverage: "80% de cobertura en consultas" },
+    {
+      id: 2,
+      name: "MindCare",
+      coverage: "Cobertura completa con copago de $20",
+    },
+    {
+      id: 3,
+      name: "WellnessPro",
+      coverage: "70% de cobertura en medicamentos",
+    },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="container mx-auto py-8 px-4 bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen"
+      className="container mx-auto py-8 px-4 bg-gray-50 min-h-screen"
     >
       <motion.h1
-        className="text-4xl font-bold text-center mb-8 text-blue-800"
-        initial={{ y: -50 }}
+        className="text-3xl font-semibold text-center mb-8 text-gray-800"
+        initial={{ y: -20 }}
         animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100 }}
+        transition={{ type: "spring", stiffness: 50 }}
       >
-        Bienvenido a tu Dashboard
+        Bienvenido a tu Espacio de Bienestar Mental
       </motion.h1>
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 gap-6">
         <AnimatedCard title="Estado Emocional">
           <CardContent>
-            <motion.p
-              className="text-6xl font-bold text-center text-blue-600"
-              initial={{ scale: 0 }}
+            <motion.div
+              className="flex items-center justify-center"
+              initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+              transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
             >
-              {emotionalState}/10
-            </motion.p>
+              <div className="relative w-32 h-32">
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                  <circle cx="50" cy="50" r="45" fill="#e0e7ff" />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    fill="none"
+                    stroke="#4f46e5"
+                    strokeWidth="10"
+                    strokeDasharray={`${emotionalState * 28.27} 282.7`}
+                    transform="rotate(-90 50 50)"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-4xl font-bold text-indigo-700">
+                    {emotionalState}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+            <p className="text-center mt-4 text-gray-600">
+              Tu estado emocional actual
+            </p>
           </CardContent>
           <CardFooter>
-            <Button className="w-full bg-blue-500 hover:bg-blue-600 transition-colors duration-200">
+            <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
               Actualizar Mi Estado
             </Button>
           </CardFooter>
@@ -69,12 +134,12 @@ export default function UserDashboard() {
             {upcomingAppointments.map((appointment, index) => (
               <motion.div
                 key={appointment.id}
-                className="mb-4 p-3 bg-white rounded-lg shadow"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                className="mb-4 p-3 bg-white rounded-lg shadow-sm border border-gray-200"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <p className="font-semibold text-blue-700">
+                <p className="font-medium text-gray-800">
                   {appointment.date} - {appointment.time}
                 </p>
                 <p className="text-sm text-gray-600">{appointment.expert}</p>
@@ -83,7 +148,7 @@ export default function UserDashboard() {
           </CardContent>
           <CardFooter>
             <Link href="/appointment" className="w-full">
-              <Button className="w-full bg-green-500 hover:bg-green-600 transition-colors duration-200">
+              <Button className="w-full bg-green-600 hover:bg-green-700 transition-colors duration-200">
                 Solicitar Nueva Cita
               </Button>
             </Link>
@@ -94,21 +159,19 @@ export default function UserDashboard() {
             {recentAppointments.map((appointment, index) => (
               <motion.div
                 key={appointment.id}
-                className="mb-4 p-3 bg-white rounded-lg shadow"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                className="mb-4 p-3 bg-white rounded-lg shadow-sm border border-gray-200"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <p className="font-semibold text-purple-700">
-                  {appointment.date}
-                </p>
+                <p className="font-medium text-gray-800">{appointment.date}</p>
                 <p className="text-sm text-gray-600">{appointment.expert}</p>
               </motion.div>
             ))}
           </CardContent>
           <CardFooter>
             <Link href="/appointmentHistory" className="w-full">
-              <Button className="w-full bg-purple-500 hover:bg-purple-600 transition-colors duration-200">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-200">
                 Ver Historial Completo
               </Button>
             </Link>
@@ -116,55 +179,95 @@ export default function UserDashboard() {
         </AnimatedCard>
         <AnimatedCard title="Evaluación de Expertos">
           <CardContent>
-            <p className="text-lg text-center text-indigo-700">
+            <p className="text-center text-gray-700">
               Tienes 2 expertos pendientes de evaluar.
             </p>
           </CardContent>
           <CardFooter>
             <Link href="/evaluation" className="w-full">
-              <Button className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors duration-200">
+              <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors duration-200">
                 Evaluar Expertos
               </Button>
             </Link>
           </CardFooter>
         </AnimatedCard>
-      </div>
-      <AnimatedCard  title="Planes de Pago">
-        <CardContent>
-          <ul className="list-disc list-inside">
-            <li>Acá puedes ver los planes disponibles</li>
+        <AnimatedCard title="Planes de Pago">
+          <CardContent>
+            <div className="space-y-4">
+              {paymentPlans.map((plan, index) => (
+                <motion.div
+                  key={plan.id}
+                  className="p-4 bg-white rounded-lg shadow-sm border border-gray-200"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <h3 className="font-semibold text-lg text-gray-800">
+                    {plan.name}
+                  </h3>
+                  <p className="text-indigo-600 font-bold">{plan.price}</p>
+                  <ul className="mt-2 space-y-1">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="text-sm text-gray-600">
+                        • {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </CardContent>
+          <CardFooter>
             <Link href="/plan" className="w-full">
-              <Button className="w-full">Ver planes</Button>
+              <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
+                Cambiar Plan
+              </Button>
             </Link>
-          </ul>
-        </CardContent>
-      </AnimatedCard>
-      <AnimatedCard  title="Seguros disponibles">
-        <CardContent>
-          <ul className="list-disc list-inside">
-            <li>Acá puedes ver los seguros médicos disponibles</li>
+          </CardFooter>
+        </AnimatedCard>
+        <AnimatedCard title="Seguros Médicos Disponibles">
+          <CardContent>
+            <div className="space-y-4">
+              {insurancePlans.map((plan, index) => (
+                <motion.div
+                  key={plan.id}
+                  className="p-4 bg-white rounded-lg shadow-sm border border-gray-200"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <h3 className="font-semibold text-gray-800">{plan.name}</h3>
+                  <p className="text-sm text-gray-600">{plan.coverage}</p>
+                </motion.div>
+              ))}
+            </div>
+          </CardContent>
+          <CardFooter>
             <Link href="/insurance" className="w-full">
-              <Button className="w-full">Ver seguros médicos</Button>
+              <Button className="w-full bg-teal-600 hover:bg-teal-700 transition-colors duration-200">
+                Más Información
+              </Button>
             </Link>
-          </ul>
-        </CardContent>
-      </AnimatedCard>
+          </CardFooter>
+        </AnimatedCard>
+      </div>
+
       <AnimatedCard title="Notificaciones Importantes" className="mt-8">
         <CardContent>
-          <ul className="list-disc list-inside space-y-2">
+          <ul className="space-y-2">
             <motion.li
-              className="text-blue-700"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              className="text-gray-700 bg-blue-50 p-3 rounded-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
               Recuerda tu próxima cita el 5 de julio a las 14:00 con la Dra. Ana
               García.
             </motion.li>
             <motion.li
-              className="text-green-700"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              className="text-gray-700 bg-green-50 p-3 rounded-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
               Nuevo artículo disponible: "Técnicas de relajación para el manejo
@@ -176,7 +279,7 @@ export default function UserDashboard() {
       <AnimatedCard title="Acceso para Expertos en Salud" className="mt-8">
         <CardContent>
           <Link href="/expertDashboard">
-            <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+            <Button className="w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
               Vista de Experto en Salud
             </Button>
           </Link>
@@ -193,9 +296,9 @@ function AnimatedCard({ title, children, className = "" }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className={`overflow-hidden shadow-lg ${className}`}>
-        <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
-          <CardTitle>{title}</CardTitle>
+      <Card className={`overflow-hidden shadow-md ${className}`}>
+        <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+          <CardTitle className="text-gray-800">{title}</CardTitle>
         </CardHeader>
         {children}
       </Card>

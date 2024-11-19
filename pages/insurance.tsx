@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-//import { Label } from "../components/ui/label"
 import {
   Card,
   CardContent,
@@ -74,20 +74,35 @@ export default function InsuranceList() {
   );
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.5 }}
+      className="container mx-auto py-8 px-4 bg-gray-50 min-h-screen"
+    >
+      <motion.h1 
+        className="text-3xl font-semibold text-center mb-8 text-gray-800"
+        initial={{ y: -20 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 50 }}
+      >
         Seguros Médicos Disponibles
-      </h1>
-      <div className="mb-8 flex gap-4">
+      </motion.h1>
+      <motion.div 
+        className="mb-8 flex flex-col sm:flex-row gap-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
         <Input
           type="text"
           placeholder="Buscar seguros"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="flex-grow"
+          className="flex-grow bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
         />
         <Select onValueChange={(value) => setFilter(value)}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full sm:w-[180px] bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200">
             <SelectValue placeholder="Filtrar por tipo" />
           </SelectTrigger>
           <SelectContent>
@@ -97,59 +112,71 @@ export default function InsuranceList() {
             <SelectItem value="Premium">Premium</SelectItem>
           </SelectContent>
         </Select>
-      </div>
-      <div className="grid md:grid-cols-3 gap-8">
-        {filteredInsurances.map((insurance) => (
-          <Card
+      </motion.div>
+      <div className="grid md:grid-cols-3 gap-6">
+        {filteredInsurances.map((insurance, index) => (
+          <motion.div
             key={insurance.id}
-            className="cursor-pointer"
-            onClick={() => setSelectedInsurance(insurance)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
           >
-            <CardHeader>
-              <CardTitle>{insurance.name}</CardTitle>
-              <CardDescription>{insurance.type}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="font-bold">{insurance.price}</p>
-              <ul className="list-disc list-inside mt-2">
-                {insurance.coverage.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full">Ver Detalles</Button>
-            </CardFooter>
-          </Card>
+            <Card
+              className="cursor-pointer transition-shadow hover:shadow-lg"
+              onClick={() => setSelectedInsurance(insurance)}
+            >
+              <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+                <CardTitle className="text-gray-800">{insurance.name}</CardTitle>
+                <CardDescription className="text-gray-600">{insurance.type}</CardDescription>
+              </CardHeader>
+              <CardContent className="p-4">
+                <p className="font-bold text-indigo-600">{insurance.price}</p>
+                <ul className="list-disc list-inside mt-2 text-gray-700">
+                  {insurance.coverage.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Ver Detalles</Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
         ))}
       </div>
       {selectedInsurance && (
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>{selectedInsurance.name}</CardTitle>
-            <CardDescription>{selectedInsurance.type}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="font-bold mb-2">Precio: {selectedInsurance.price}</p>
-            <p className="font-semibold mb-2">Cobertura:</p>
-            <ul className="list-disc list-inside">
-              {selectedInsurance.coverage.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-4">
-              Este seguro ofrece una excelente cobertura para tus necesidades de
-              salud mental. Incluye acceso a una amplia red de profesionales y
-              servicios de alta calidad.
-            </p>
-          </CardContent>
-          <CardFooter>
-            <Button className="w-full bg-blue-600 hover:bg-blue-700">
-              Vincular Seguro
-            </Button>
-          </CardFooter>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Card className="mt-8 overflow-hidden shadow-md">
+            <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+              <CardTitle className="text-gray-800">{selectedInsurance.name}</CardTitle>
+              <CardDescription className="text-gray-600">{selectedInsurance.type}</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <p className="font-bold mb-2 text-indigo-600">Precio: {selectedInsurance.price}</p>
+              <p className="font-semibold mb-2 text-gray-700">Cobertura:</p>
+              <ul className="list-disc list-inside text-gray-600">
+                {selectedInsurance.coverage.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+              <p className="mt-4 text-gray-700">
+                Este seguro ofrece una excelente cobertura para tus necesidades de
+                salud mental. Incluye acceso a una amplia red de profesionales y
+                servicios de alta calidad.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
+                Vincular Seguro
+              </Button>
+            </CardFooter>
+          </Card>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
