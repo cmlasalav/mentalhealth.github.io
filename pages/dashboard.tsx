@@ -82,7 +82,7 @@ export default function UserDashboard() {
             ))}
           </CardContent>
           <CardFooter>
-            <Link href="/appointment-request" className="w-full">
+            <Link href="/appointment" className="w-full">
               <Button className="w-full bg-green-500 hover:bg-green-600 transition-colors duration-200">
                 Solicitar Nueva Cita
               </Button>
@@ -107,7 +107,7 @@ export default function UserDashboard() {
             ))}
           </CardContent>
           <CardFooter>
-            <Link href="/appointment-history" className="w-full">
+            <Link href="/appointmentHistory" className="w-full">
               <Button className="w-full bg-purple-500 hover:bg-purple-600 transition-colors duration-200">
                 Ver Historial Completo
               </Button>
@@ -121,7 +121,7 @@ export default function UserDashboard() {
             </p>
           </CardContent>
           <CardFooter>
-            <Link href="/expert-evaluation" className="w-full">
+            <Link href="/evaluation" className="w-full">
               <Button className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors duration-200">
                 Evaluar Expertos
               </Button>
@@ -175,7 +175,7 @@ export default function UserDashboard() {
       </AnimatedCard>
       <AnimatedCard title="Acceso para Expertos en Salud" className="mt-8">
         <CardContent>
-          <Link href="/expert-dashboard">
+          <Link href="/expertDashboard">
             <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
               Vista de Experto en Salud
             </Button>
