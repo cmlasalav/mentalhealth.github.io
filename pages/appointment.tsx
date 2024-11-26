@@ -60,7 +60,6 @@ export default function AppointmentRequest() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    // Aquí iría la lógica de solicitud de cita
     setTimeout(() => {
       setIsLoading(false);
       alert(
@@ -120,7 +119,7 @@ export default function AppointmentRequest() {
                 <CardDescription className="text-gray-600">{expert.specialty}</CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Solicitar Cita</Button>
+                <Button className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Solicitar Cita</Button>
               </CardFooter>
             </Card>
           </motion.div>
@@ -157,7 +156,7 @@ export default function AppointmentRequest() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+                    className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
                     disabled={isLoading}
                   >
                     {isLoading && (

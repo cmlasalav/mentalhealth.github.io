@@ -101,7 +101,7 @@ export default function ExpertEvaluation() {
                 <p className="text-gray-600">Última cita: {expert.lastAppointment}</p>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Evaluar</Button>
+                <Button className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Evaluar</Button>
               </CardFooter>
             </Card>
           </motion.div>
@@ -151,7 +151,7 @@ export default function ExpertEvaluation() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+                    className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
                     disabled={isLoading}
                   >
                     {isLoading && (

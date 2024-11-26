@@ -105,7 +105,7 @@ export default function InsuranceList() {
           <SelectTrigger className="w-full sm:w-[180px] bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200">
             <SelectValue placeholder="Filtrar por tipo" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white">
             <SelectItem value="Todos">Todos</SelectItem>
             <SelectItem value="Completo">Completo</SelectItem>
             <SelectItem value="Básico">Básico</SelectItem>

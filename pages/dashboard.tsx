@@ -40,27 +40,17 @@ export default function UserDashboard() {
     {
       id: 1,
       name: "Plan Básico",
-      price: "$49/mes",
-      features: ["1 sesión semanal", "Acceso a recursos básicos"],
+      price: "$9.99/mes",
+      features: ["Sin anuncios en toda la plataforma", "Acceso a contenido exclusivo"],
     },
     {
       id: 2,
       name: "Plan Estándar",
-      price: "$99/mes",
+      price: "$199.99/lifetime",
       features: [
-        "2 sesiones semanales",
-        "Acceso a todos los recursos",
-        "Soporte 24/7",
-      ],
-    },
-    {
-      id: 3,
-      name: "Plan Premium",
-      price: "$149/mes",
-      features: [
-        "Sesiones ilimitadas",
-        "Acceso prioritario a expertos",
-        "Evaluaciones mensuales",
+        "Sin anuncios de por vida",
+        "Acceso a todas las funciones premium",
+        "Soporte prioritario",
       ],
     },
   ];
@@ -193,7 +183,7 @@ export default function UserDashboard() {
         <AnimatedCard title="Evaluación de Expertos">
           <CardContent>
             <p className="text-center text-gray-700">
-              Tienes 2 expertos pendientes de evaluar.
+              Tienes 3 expertos pendientes de evaluar.
             </p>
           </CardContent>
           <CardFooter>
