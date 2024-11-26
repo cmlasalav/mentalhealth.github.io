@@ -138,7 +138,7 @@ export default function AppointmentHistory() {
                     <SelectTrigger className="bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200">
                       <SelectValue placeholder="Selecciona tu nivel emocional" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white">
                       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                         <SelectItem key={num} value={num.toString()}>
                           {num}
@@ -161,7 +161,7 @@ export default function AppointmentHistory() {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+                  className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
                 >
                   Registrar Estado Emocional
                 </Button>

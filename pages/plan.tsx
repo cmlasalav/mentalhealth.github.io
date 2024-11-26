@@ -159,7 +159,7 @@ export default function PlanSelection() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+                    className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
                     disabled={isLoading}
                   >
                     {isLoading && (

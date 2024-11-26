@@ -138,7 +138,7 @@ export default function InsuranceList() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Ver Detalles</Button>
+                <Button className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">Ver Detalles</Button>
               </CardFooter>
             </Card>
           </motion.div>
@@ -170,7 +170,7 @@ export default function InsuranceList() {
               </p>
             </CardContent>
             <CardFooter>
-              <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
+              <Button className="w-full text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
                 Vincular Seguro
               </Button>
             </CardFooter>

@@ -213,6 +213,8 @@ function PatientsCard() {
                 <LineChart data={emotionalData}>
                   <XAxis dataKey="date" hide />
                   <YAxis hide domain={[0, 10]} />
+                  <YAxis domain={[0, 10]} />
+                  <Tooltip contentStyle={{ backgroundColor: '#e6fffa', border: '1px solid #2c7a7b' }} />
                   <Line type="monotone" dataKey="score" stroke="#2c7a7b" strokeWidth={2} dot={{ fill: '#2c7a7b', strokeWidth: 2 }} />
                 </LineChart>
               </ResponsiveContainer>

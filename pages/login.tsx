@@ -77,7 +77,7 @@ export default function AuthPage() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    className="w-full text-white bg-blue-600 hover:bg-blue-700"
                     disabled={isLoading}
                   >
                     {isLoading && (
@@ -93,13 +93,13 @@ export default function AuthPage() {
                 <div className="space-y-4">
                   <Button
                     onClick={() => setRegisterType("patient")}
-                    className="w-full bg-green-600 hover:bg-green-700"
+                    className="w-full text-white bg-green-600 hover:bg-green-700"
                   >
                     Registrarse como Paciente
                   </Button>
                   <Button
                     onClick={() => setRegisterType("expert")}
-                    className="w-full bg-purple-600 hover:bg-purple-700"
+                    className="w-full text-white bg-purple-600 hover:bg-purple-700"
                   >
                     Registrarse como Experto en Salud
                   </Button>
@@ -148,7 +148,7 @@ export default function AuthPage() {
                     )}
                     <Button
                       type="submit"
-                      className="w-full bg-blue-600 hover:bg-blue-700"
+                      className="w-full text-white bg-blue-600 hover:bg-blue-700"
                       disabled={isLoading}
                     >
                       {isLoading && (

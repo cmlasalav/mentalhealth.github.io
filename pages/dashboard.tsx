@@ -10,12 +10,17 @@ import {
   CardTitle,
   CardFooter,
 } from "../components/ui/card";
-import { Icons } from "../components/ui/icons";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
 import Link from "next/link";
 
 export default function UserDashboard() {
-  const [emotionalState, setEmotionalState] = useState<number>(7);
-
+  const [emotionalState, setEmotionalState] = useState<string>("7");
   const upcomingAppointments = [
     { id: 1, date: "2023-07-05", time: "14:00", expert: "Dra. Ana García" },
     {
@@ -108,7 +113,7 @@ export default function UserDashboard() {
                     fill="none"
                     stroke="#4f46e5"
                     strokeWidth="10"
-                    strokeDasharray={`${emotionalState * 28.27} 282.7`}
+                    strokeDasharray={`${Number(emotionalState) * 28.27} 282.7`}
                     transform="rotate(-90 50 50)"
                   />
                 </svg>
@@ -122,12 +127,20 @@ export default function UserDashboard() {
             <p className="text-center mt-4 text-gray-600">
               Tu estado emocional actual
             </p>
+            <Select value={emotionalState} onValueChange={setEmotionalState}>
+              <SelectTrigger className="bg-white border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200">
+                <SelectValue placeholder="Selecciona tu nivel emocional" />
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </CardContent>
-          <CardFooter>
-            <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
-              Actualizar Mi Estado
-            </Button>
-          </CardFooter>
+          <CardFooter></CardFooter>
         </AnimatedCard>
         <AnimatedCard title="Próximas Citas">
           <CardContent>
@@ -148,7 +161,7 @@ export default function UserDashboard() {
           </CardContent>
           <CardFooter>
             <Link href="/appointment" className="w-full">
-              <Button className="w-full bg-green-600 hover:bg-green-700 transition-colors duration-200">
+              <Button className="w-full text-white  bg-green-600 hover:bg-green-700 transition-colors duration-200">
                 Solicitar Nueva Cita
               </Button>
             </Link>
@@ -171,7 +184,7 @@ export default function UserDashboard() {
           </CardContent>
           <CardFooter>
             <Link href="/appointmentHistory" className="w-full">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-200">
+              <Button className="w-full text-white  bg-blue-600 hover:bg-blue-700 transition-colors duration-200">
                 Ver Historial Completo
               </Button>
             </Link>
@@ -185,7 +198,7 @@ export default function UserDashboard() {
           </CardContent>
           <CardFooter>
             <Link href="/evaluation" className="w-full">
-              <Button className="w-full bg-purple-600 hover:bg-purple-700 transition-colors duration-200">
+              <Button className="w-full text-white  bg-purple-600 hover:bg-purple-700 transition-colors duration-200">
                 Evaluar Expertos
               </Button>
             </Link>
@@ -219,7 +232,7 @@ export default function UserDashboard() {
           </CardContent>
           <CardFooter>
             <Link href="/plan" className="w-full">
-              <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
+              <Button className="w-full text-white  bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
                 Cambiar Plan
               </Button>
             </Link>
@@ -244,7 +257,7 @@ export default function UserDashboard() {
           </CardContent>
           <CardFooter>
             <Link href="/insurance" className="w-full">
-              <Button className="w-full bg-teal-600 hover:bg-teal-700 transition-colors duration-200">
+              <Button className="w-full text-white  bg-teal-600 hover:bg-teal-700 transition-colors duration-200">
                 Más Información
               </Button>
             </Link>
