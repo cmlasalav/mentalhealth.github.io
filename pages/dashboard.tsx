@@ -273,8 +273,10 @@ export default function UserDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              Nuevo artículo disponible: "Técnicas de relajación para el manejo
-              del estrés".
+              <Link href="/article" className="block hover:text-green-700 transition-colors duration-200">
+                Nuevo artículo disponible: "Técnicas de relajación para el manejo
+                del estrés".
+              </Link>
             </motion.li>
           </ul>
         </CardContent>
